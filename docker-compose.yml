@@ -1,37 +1,36 @@
 version: '3'
 services:
-  ansible:
+  ansible1:
      build:
         context: .
         dockerfile: Dockerfile
      image: ansible-master
      privileged: yes
      container_name: ansible-master
-     links:
-       - ansible2
-       - ansible3
-      dns:
-        - 8.8.8.8
-        - 8.8.4.4
-      networks:
-         test1:
-           ipv4_address: 192.168.0.2
-      dns_search:
+     #links:
+     #   - ansible2
+     dns:
+       - 8.8.8.8
+       - 8.8.4.4
+     networks:
+        test1:
+          ipv4_address: 192.168.0.2
+     dns_search:
          - siva.local
-      cap_add:
+     cap_add:
          - ALL
-      tty: yes
-  ansible-slave:
+     tty: yes
+  ansible2:
       depends_on: 
-        - ansible
+        - ansible1
       build:
         context: .
         dockerfile: Dockerfile-slave
       image: ansible-slave
       privileged: yes
-      container_name: ansible-slave
+      container_name: ansible-slave1
       links:
-        - ansible1
+              - ansible1:ansible1
       dns:
         - 8.8.8.8
         - 8.8.4.4
@@ -50,4 +49,4 @@ networks:
        driver: default
        config:
          - subnet: 192.168.0.0/16
-           gateway: 192.168.0.1
+           #gateway: "192.168.0.1"
