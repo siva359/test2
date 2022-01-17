@@ -1,0 +1,43 @@
+version: '3'
+services:
+  ansible:
+     build:
+        context: .
+        dockerfile: Dockerfile
+     image: ansible-master
+     privileged: yes
+     container_name: ansible-master
+     links:
+       - ansible2
+       - ansible3
+      dns:
+        - 8.8.8.8
+        - 8.8.4.4
+      networks:
+         test1:
+           ipv4_address: 192.168.0.2
+  ansible-slave:
+      depends_on: 
+        - ansible
+      build:
+        context: .
+        dockerfile: Dockerfile-slave
+      image: ansible-slave
+      privileged: yes
+      container_name: ansible-slave
+      links:
+        - ansible1
+      dns:
+        - 8.8.8.8
+        - 8.8.4.4
+      networks:
+        test1:
+          ipv4_address: 192.168.0.3
+networks:
+  test1:
+     driver: bridge
+     ipam:
+       driver: default
+       config:
+         - subnet: 192.168.0.0/16
+           gateway: 192.168.0.1
