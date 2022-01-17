@@ -20,6 +20,8 @@ services:
      cap_add:
          - ALL
      tty: yes
+     volumes:
+       - ./hosts:/etc/ansible/hosts
   ansible2:
       depends_on: 
         - ansible1
