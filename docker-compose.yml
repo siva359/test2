@@ -44,6 +44,30 @@ services:
       cap_add:
          - ALL
       tty: yes
+  ansible3:
+      depends_on: 
+        - ansible1
+        - ansible2
+      build:
+        context: .
+        dockerfile: Dockerfile-slave
+      image: ansible-slave
+      privileged: yes
+      container_name: ansible-slave2
+      links:
+              - ansible1:ansible1
+              - ansible2:ansible2
+      dns:
+        - 8.8.8.8
+        - 8.8.4.4
+      networks:
+        test1:
+          ipv4_address: 192.168.0.4
+      dns_search:
+         - siva.local
+      cap_add:
+         - ALL
+      tty: yes
 networks:
   test1:
      driver: bridge
