@@ -10,7 +10,10 @@ jobs:
 
   build:
 
-    runs-on: node:10.16.3
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [10.16.3]
 
     steps:
     - uses: actions/checkout@v2
