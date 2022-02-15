@@ -15,7 +15,6 @@ jobs:
         #node: [10.16.3]
 
     steps:
-    - uses: actions/setup-node@v10.16.3
     - uses: actions/checkout@v2
     - name: Build the Docker image
       #run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
