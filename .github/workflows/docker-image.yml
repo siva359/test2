@@ -22,7 +22,7 @@ jobs:
        # node-version: ${{ matrix.node }}
     - run: node -v
     - run: |
-        cd build
+        #cd build
         npm install
         npm install colors -g
         npm install -g sfcc-ci --save-dev
