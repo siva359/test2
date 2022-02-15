@@ -1,3 +1,4 @@
+image: node:10.16.3
 name: Docker Image CI
 
 on:
@@ -21,8 +22,8 @@ jobs:
      # with:
        # node-version: ${{ matrix.node }}
     - run: node -v
-    - run: |
-        #cd build
-        npm install
-        npm install colors -g
-        npm install -g sfcc-ci --save-dev
+    #- run: |
+        ##cd build
+        #npm install
+        #npm install colors -g
+        #npm install -g sfcc-ci --save-dev
