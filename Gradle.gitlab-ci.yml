@@ -39,8 +39,8 @@ test:
       - build
       - .gradle
 
-test2:
-  stage: test
+test3:
+  stage: test3
   script: gradle check
   cache:
     key: "$CI_COMMIT_REF_NAME"
